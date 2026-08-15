@@ -1,72 +1,53 @@
-const config = window.PHOTO_SITE_CONFIG || {};
+﻿const config = window.PHOTO_SITE_CONFIG || {};
 const imageBaseUrl = (config.imageBaseUrl || "").replace(/\/$/, "");
 
-const photos = [
+const groups = [
   {
-    title: "Urban Light",
-    album: "城市",
-    year: "2026",
-    file: "/sample/urban-light-1200.webp",
-    ratio: "4 / 5",
+    id: "digitalColor",
+    medium: "digital",
+    tone: "color",
+    title: "数码摄影 / 彩色摄影",
+    items: [
+      { title: "Urban Light", year: "2026", file: "public-images/digital/color-01.webp", ratio: "4 / 5" },
+      { title: "Street Motion", year: "2025", file: "public-images/digital/color-02.webp", ratio: "3 / 4" },
+    ],
   },
   {
-    title: "Quiet Portrait",
-    album: "人像",
-    year: "2026",
-    file: "/sample/quiet-portrait-1200.webp",
-    ratio: "3 / 4",
+    id: "digitalMono",
+    medium: "digital",
+    tone: "mono",
+    title: "数码摄影 / 黑白摄影",
+    items: [
+      { title: "Quiet Portrait", year: "2026", file: "public-images/digital/mono-01.webp", ratio: "3 / 4" },
+      { title: "Concrete Edge", year: "2025", file: "public-images/digital/mono-02.webp", ratio: "4 / 5" },
+    ],
   },
   {
-    title: "After Rain",
-    album: "街拍",
-    year: "2025",
-    file: "/sample/after-rain-1200.webp",
-    ratio: "5 / 4",
+    id: "filmColor",
+    medium: "film",
+    tone: "color",
+    title: "胶卷摄影 / 彩色摄影",
+    items: [
+      { title: "After Rain", year: "2025", file: "public-images/film/color-01.webp", ratio: "5 / 4" },
+      { title: "Evening Walk", year: "2024", file: "public-images/film/color-02.webp", ratio: "2 / 3" },
+    ],
   },
   {
-    title: "Concrete Edge",
-    album: "建筑",
-    year: "2025",
-    file: "/sample/concrete-edge-1200.webp",
-    ratio: "4 / 3",
-  },
-  {
-    title: "Evening Walk",
-    album: "旅行",
-    year: "2024",
-    file: "/sample/evening-walk-1200.webp",
-    ratio: "2 / 3",
-  },
-  {
-    title: "Studio Study",
-    album: "商业",
-    year: "2024",
-    file: "/sample/studio-study-1200.webp",
-    ratio: "1 / 1",
-  },
-];
-
-const albums = [
-  {
-    title: "人像 Portraits",
-    description: "个人肖像、环境人像与编辑类拍摄。",
-    cover: "/sample/quiet-portrait-1200.webp",
-  },
-  {
-    title: "城市 City",
-    description: "街道、建筑、夜景与城市切片。",
-    cover: "/sample/urban-light-1200.webp",
-  },
-  {
-    title: "项目 Projects",
-    description: "长期观察、委托拍摄和完整专题。",
-    cover: "/sample/concrete-edge-1200.webp",
+    id: "filmMono",
+    medium: "film",
+    tone: "mono",
+    title: "胶卷摄影 / 黑白摄影",
+    items: [
+      { title: "Shadow Study", year: "2024", file: "public-images/film/mono-01.webp", ratio: "4 / 3" },
+      { title: "Window Frame", year: "2024", file: "public-images/film/mono-02.webp", ratio: "1 / 1" },
+    ],
   },
 ];
 
 function imageUrl(file) {
-  if (/^https?:\/\//.test(file)) return file;
-  return `${imageBaseUrl}${file}`;
+  if (/^https?:\/\//i.test(file) || file.startsWith("data:")) return file;
+  if (!imageBaseUrl) return file;
+  return `${imageBaseUrl.replace(/\/$/, "")}/${file.replace(/^\//, "")}`;
 }
 
 function placeholder(node, label) {
@@ -75,67 +56,51 @@ function placeholder(node, label) {
   node.style.background = "linear-gradient(135deg, #d8d2c8, #87938d)";
 }
 
-function mountHero() {
+function renderHero() {
   const heroImage = document.querySelector("#heroImage");
-  const first = photos[0];
+  const first = groups[0].items[0];
   heroImage.src = imageUrl(first.file);
   heroImage.alt = first.title;
-  heroImage.onerror = () => placeholder(heroImage, "请上传首页封面图");
+  heroImage.onerror = () => placeholder(heroImage, "请放入首页封面图");
 }
 
-function mountPhotos() {
-  const masonry = document.querySelector("#work");
-  masonry.innerHTML = photos
+function renderGroup(group) {
+  const root = document.querySelector(`#${group.id}`);
+  if (!root) return;
+  root.innerHTML = group.items
     .map(
-      (photo, index) => `
-        <button class="photo-card" style="--ratio:${photo.ratio}" data-index="${index}">
-          <img src="${imageUrl(photo.file)}" alt="${photo.title}" loading="lazy" />
+      (item, index) => `
+        <button class="photo-card" style="--ratio:${item.ratio}" data-group="${group.id}" data-index="${index}">
+          <img src="${imageUrl(item.file)}" alt="${item.title}" loading="lazy" />
           <span class="photo-meta">
-            <strong>${photo.title}</strong>
-            <span>${photo.album} · ${photo.year}</span>
+            <strong>${item.title}</strong>
+            <span>${group.title} · ${item.year}</span>
           </span>
         </button>
       `,
     )
     .join("");
 
-  masonry.querySelectorAll("img").forEach((img) => {
-    img.onerror = () => placeholder(img, "请上传作品图片");
+  root.querySelectorAll("img").forEach((img) => {
+    img.onerror = () => placeholder(img, "请放入作品图片");
   });
 
-  masonry.querySelectorAll(".photo-card").forEach((card) => {
-    card.addEventListener("click", () => openLightbox(photos[card.dataset.index]));
-  });
-}
-
-function mountAlbums() {
-  const grid = document.querySelector("#albumGrid");
-  grid.innerHTML = albums
-    .map(
-      (album) => `
-        <article class="album-card">
-          <img src="${imageUrl(album.cover)}" alt="${album.title}" loading="lazy" />
-          <div>
-            <h3>${album.title}</h3>
-            <p>${album.description}</p>
-          </div>
-        </article>
-      `,
-    )
-    .join("");
-
-  grid.querySelectorAll("img").forEach((img) => {
-    img.onerror = () => placeholder(img, "请上传相册封面");
+  root.querySelectorAll(".photo-card").forEach((card) => {
+    card.addEventListener("click", () => {
+      const groupData = groups.find((entry) => entry.id === card.dataset.group);
+      const photo = groupData.items[Number(card.dataset.index)];
+      openLightbox(photo, groupData.title);
+    });
   });
 }
 
-function openLightbox(photo) {
+function openLightbox(photo, groupTitle) {
   const dialog = document.querySelector("#lightbox");
   const image = document.querySelector("#lightboxImage");
   const caption = document.querySelector("#lightboxCaption");
   image.src = imageUrl(photo.file);
   image.alt = photo.title;
-  caption.textContent = `${photo.title} / ${photo.album} / ${photo.year}`;
+  caption.textContent = `${photo.title} / ${groupTitle} / ${photo.year}`;
   if (typeof dialog.showModal === "function") dialog.showModal();
 }
 
@@ -145,6 +110,5 @@ document.querySelector("#closeLightbox").addEventListener("click", () => {
 
 document.querySelector("#year").textContent = new Date().getFullYear();
 
-mountHero();
-mountPhotos();
-mountAlbums();
+renderHero();
+groups.forEach(renderGroup);

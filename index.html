@@ -1,11 +1,11 @@
-<!doctype html>
+﻿<!doctype html>
 <html lang="zh-CN">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="个人摄影作品集，展示人像、城市、旅行与个人项目。"
+      content="个人摄影作品集，按数码与胶卷分类，并细分彩色与黑白作品。"
     />
     <title>Mo Photo Studio</title>
     <link rel="stylesheet" href="./styles.css" />
@@ -14,49 +14,86 @@
     <header class="site-header">
       <a class="brand" href="#top" aria-label="返回首页">Mo Photo Studio</a>
       <nav class="nav" aria-label="主导航">
-        <a href="#work">作品</a>
-        <a href="#albums">系列</a>
+        <a href="#featured">精选</a>
+        <a href="#digital">数码</a>
+        <a href="#film">胶卷</a>
         <a href="#about">关于</a>
         <a href="#contact">联系</a>
       </nav>
     </header>
 
     <main id="top">
-      <section class="hero" aria-label="精选摄影作品">
+      <section class="hero" aria-label="摄影作品集首页">
         <div class="hero-media">
           <img id="heroImage" alt="" />
         </div>
         <div class="hero-copy">
           <p class="eyebrow">Photography Portfolio</p>
-          <h1>以影像记录城市、人物与日常现场。</h1>
+          <h1>以数码与胶卷，记录彩色与黑白的两种观看方式。</h1>
           <p>
-            这里是你的个人摄影作品网站骨架。替换图片、名字和作品说明后，可以部署到国内服务器或静态托管。
+            这个版本已经改成四级分类结构：数码摄影和胶卷摄影下面，各自再分彩色摄影与黑白摄影。
           </p>
           <div class="hero-actions">
-            <a class="button primary" href="#work">查看作品</a>
-            <a class="button secondary" href="#contact">预约拍摄</a>
+            <a class="button primary" href="#featured">查看精选</a>
+            <a class="button secondary" href="#contact">联系我</a>
           </div>
         </div>
       </section>
 
-      <section class="section intro" aria-label="网站概览">
+      <section id="featured" class="section intro">
         <div>
-          <p class="section-kicker">Selected Work</p>
-          <h2>精选作品</h2>
+          <p class="section-kicker">Overview</p>
+          <h2>分类结构</h2>
         </div>
         <p>
-          用少量强作品建立第一印象。建议首页保留 8-12 张代表作，完整系列放到下方相册。
+          你以后只需要把图片放进对应文件夹，网站就会自动按“数码 / 胶卷 / 彩色 / 黑白”展示。
         </p>
       </section>
 
-      <section id="work" class="masonry" aria-label="精选作品列表"></section>
-
-      <section id="albums" class="section">
-        <div>
-          <p class="section-kicker">Albums</p>
-          <h2>作品系列</h2>
+      <section id="digital" class="category-block">
+        <div class="category-head">
+          <p class="section-kicker">Digital</p>
+          <h2>数码摄影</h2>
         </div>
-        <div id="albumGrid" class="album-grid"></div>
+        <div class="subcategory-grid">
+          <article class="subcategory">
+            <div class="subcategory-head">
+              <h3>彩色摄影</h3>
+              <p>城市、人物、纪实与日常现场。</p>
+            </div>
+            <div id="digitalColor" class="photo-grid"></div>
+          </article>
+          <article class="subcategory">
+            <div class="subcategory-head">
+              <h3>黑白摄影</h3>
+              <p>结构、光影、情绪和简化后的画面。</p>
+            </div>
+            <div id="digitalMono" class="photo-grid"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="film" class="category-block">
+        <div class="category-head">
+          <p class="section-kicker">Film</p>
+          <h2>胶卷摄影</h2>
+        </div>
+        <div class="subcategory-grid">
+          <article class="subcategory">
+            <div class="subcategory-head">
+              <h3>彩色摄影</h3>
+              <p>颗粒、色彩和胶片特有的层次。</p>
+            </div>
+            <div id="filmColor" class="photo-grid"></div>
+          </article>
+          <article class="subcategory">
+            <div class="subcategory-head">
+              <h3>黑白摄影</h3>
+              <p>传统黑白、街景和更克制的叙事。</p>
+            </div>
+            <div id="filmMono" class="photo-grid"></div>
+          </article>
+        </div>
       </section>
 
       <section id="about" class="about">
@@ -65,7 +102,7 @@
           <h2>关于我</h2>
         </div>
         <p>
-          我关注城市空间、人的状态与生活中短暂却有力量的瞬间。可在这里补充你的摄影方向、服务类型、展览经历、合作品牌或社交媒体链接。
+          这里可以放你的简介、拍摄方向、展览经历和合作信息。现在先保留最小结构，后面你要我可以继续把这里改成正式个人介绍。
         </p>
       </section>
 
