@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta
+      name="description"
+      content="个人摄影作品集，展示人像、城市、旅行与个人项目。"
+    />
+    <title>Mo Photo Studio</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="返回首页">Mo Photo Studio</a>
+      <nav class="nav" aria-label="主导航">
+        <a href="#work">作品</a>
+        <a href="#albums">系列</a>
+        <a href="#about">关于</a>
+        <a href="#contact">联系</a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero" aria-label="精选摄影作品">
+        <div class="hero-media">
+          <img id="heroImage" alt="" />
+        </div>
+        <div class="hero-copy">
+          <p class="eyebrow">Photography Portfolio</p>
+          <h1>以影像记录城市、人物与日常现场。</h1>
+          <p>
+            这里是你的个人摄影作品网站骨架。替换图片、名字和作品说明后，可以部署到国内服务器或静态托管。
+          </p>
+          <div class="hero-actions">
+            <a class="button primary" href="#work">查看作品</a>
+            <a class="button secondary" href="#contact">预约拍摄</a>
+          </div>
+        </div>
+      </section>
+
+      <section class="section intro" aria-label="网站概览">
+        <div>
+          <p class="section-kicker">Selected Work</p>
+          <h2>精选作品</h2>
+        </div>
+        <p>
+          用少量强作品建立第一印象。建议首页保留 8-12 张代表作，完整系列放到下方相册。
+        </p>
+      </section>
+
+      <section id="work" class="masonry" aria-label="精选作品列表"></section>
+
+      <section id="albums" class="section">
+        <div>
+          <p class="section-kicker">Albums</p>
+          <h2>作品系列</h2>
+        </div>
+        <div id="albumGrid" class="album-grid"></div>
+      </section>
+
+      <section id="about" class="about">
+        <div>
+          <p class="section-kicker">About</p>
+          <h2>关于我</h2>
+        </div>
+        <p>
+          我关注城市空间、人的状态与生活中短暂却有力量的瞬间。可在这里补充你的摄影方向、服务类型、展览经历、合作品牌或社交媒体链接。
+        </p>
+      </section>
+
+      <section id="contact" class="contact">
+        <div>
+          <p class="section-kicker">Contact</p>
+          <h2>联系与预约</h2>
+        </div>
+        <div class="contact-list">
+          <a href="mailto:hello@example.com">hello@example.com</a>
+          <span>微信：your-wechat-id</span>
+          <a href="https://www.xiaohongshu.com/" rel="noreferrer">小红书</a>
+          <a href="https://www.instagram.com/" rel="noreferrer">Instagram</a>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="lightbox" class="lightbox" aria-label="图片预览">
+      <button id="closeLightbox" class="icon-button" aria-label="关闭预览">×</button>
+      <img id="lightboxImage" alt="" />
+      <p id="lightboxCaption"></p>
+    </dialog>
+
+    <footer class="footer">
+      <span>© <span id="year"></span> Mo Photo Studio</span>
+      <span>Built for mainland China hosting.</span>
+    </footer>
+
+    <script src="./site.config.js"></script>
+    <script src="./script.js"></script>
+  </body>
+</html>
