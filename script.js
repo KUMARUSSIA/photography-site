@@ -4,8 +4,6 @@ const imageBaseUrl = (config.imageBaseUrl || "").replace(/\/$/, "");
 const groups = [
   {
     id: "digitalColor",
-    medium: "digital",
-    tone: "color",
     title: "数码摄影 / 彩色摄影",
     items: [
       { title: "Urban Light", year: "2026", file: "public-images/digital/color-01.webp", ratio: "4 / 5" },
@@ -14,8 +12,6 @@ const groups = [
   },
   {
     id: "digitalMono",
-    medium: "digital",
-    tone: "mono",
     title: "数码摄影 / 黑白摄影",
     items: [
       { title: "Quiet Portrait", year: "2026", file: "public-images/digital/mono-01.webp", ratio: "3 / 4" },
@@ -24,8 +20,6 @@ const groups = [
   },
   {
     id: "filmColor",
-    medium: "film",
-    tone: "color",
     title: "胶卷摄影 / 彩色摄影",
     items: [
       { title: "After Rain", year: "2025", file: "public-images/film/color-01.webp", ratio: "5 / 4" },
@@ -34,19 +28,26 @@ const groups = [
   },
   {
     id: "filmMono",
-    medium: "film",
-    tone: "mono",
     title: "胶卷摄影 / 黑白摄影",
     items: [
       { title: "Shadow Study", year: "2024", file: "public-images/film/mono-01.webp", ratio: "4 / 3" },
       { title: "Window Frame", year: "2024", file: "public-images/film/mono-02.webp", ratio: "1 / 1" },
     ],
   },
+  {
+    id: "projectGrid",
+    title: "项目摄影",
+    items: [
+      { title: "Editorial Set", year: "2026", file: "public-images/project/project-01.webp", ratio: "4 / 5" },
+      { title: "Long Term Study", year: "2025", file: "public-images/project/project-02.webp", ratio: "3 / 4" },
+      { title: "Commission Work", year: "2025", file: "public-images/project/project-03.webp", ratio: "5 / 4" },
+    ],
+  },
 ];
 
 function imageUrl(file) {
   if (/^https?:\/\//i.test(file) || file.startsWith("data:")) return file;
-  if (!imageBaseUrl) return file;
+  if (!imageBaseUrl || imageBaseUrl === "./") return `./${file}`;
   return `${imageBaseUrl.replace(/\/$/, "")}/${file.replace(/^\//, "")}`;
 }
 
@@ -109,6 +110,10 @@ document.querySelector("#closeLightbox").addEventListener("click", () => {
 });
 
 document.querySelector("#year").textContent = new Date().getFullYear();
+
+document.querySelectorAll(".photo-card img").forEach((img) => {
+  img.onerror = () => placeholder(img, "请放入作品图片");
+});
 
 renderHero();
 groups.forEach(renderGroup);

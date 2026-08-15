@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta
       name="description"
-      content="个人摄影作品集，按数码与胶卷分类，并细分彩色与黑白作品。"
+      content="个人摄影作品集，按数码、胶卷与项目摄影分类，并细分彩色与黑白作品。"
     />
     <title>Mo Photo Studio</title>
     <link rel="stylesheet" href="./styles.css" />
@@ -17,6 +17,7 @@
         <a href="#featured">精选</a>
         <a href="#digital">数码</a>
         <a href="#film">胶卷</a>
+        <a href="#project">项目</a>
         <a href="#about">关于</a>
         <a href="#contact">联系</a>
       </nav>
@@ -29,9 +30,9 @@
         </div>
         <div class="hero-copy">
           <p class="eyebrow">Photography Portfolio</p>
-          <h1>以数码与胶卷，记录彩色与黑白的两种观看方式。</h1>
+          <h1>以数码、胶卷与项目摄影，记录彩色与黑白的不同表达。</h1>
           <p>
-            这个版本已经改成四级分类结构：数码摄影和胶卷摄影下面，各自再分彩色摄影与黑白摄影。
+            当前站点分成三个主栏目：数码摄影、胶卷摄影和项目摄影。每个栏目都可以继续按彩色与黑白整理。
           </p>
           <div class="hero-actions">
             <a class="button primary" href="#featured">查看精选</a>
@@ -46,7 +47,7 @@
           <h2>分类结构</h2>
         </div>
         <p>
-          你以后只需要把图片放进对应文件夹，网站就会自动按“数码 / 胶卷 / 彩色 / 黑白”展示。
+          你以后只需要把图片放进对应文件夹，网站就会自动按“数码 / 胶卷 / 项目摄影”展示。
         </p>
       </section>
 
@@ -92,6 +93,22 @@
               <p>传统黑白、街景和更克制的叙事。</p>
             </div>
             <div id="filmMono" class="photo-grid"></div>
+          </article>
+        </div>
+      </section>
+
+      <section id="project" class="category-block">
+        <div class="category-head">
+          <p class="section-kicker">Project</p>
+          <h2>项目摄影</h2>
+        </div>
+        <div class="subcategory-grid single-column">
+          <article class="subcategory">
+            <div class="subcategory-head">
+              <h3>专题项目</h3>
+              <p>展览、委托、长期观察与完整叙事项目。</p>
+            </div>
+            <div id="projectGrid" class="photo-grid"></div>
           </article>
         </div>
       </section>
