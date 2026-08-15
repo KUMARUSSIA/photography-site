@@ -1,20 +1,10 @@
-name: Deploy static site to server
+name: Disabled server deploy template
 
 on:
-  push:
-    branches: [main]
+  workflow_dispatch:
 
 jobs:
-  deploy:
+  noop:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Upload files
-        uses: appleboy/scp-action@v0.1.7
-        with:
-          host: ${{ secrets.SERVER_HOST }}
-          username: ${{ secrets.SERVER_USER }}
-          key: ${{ secrets.SERVER_SSH_KEY }}
-          source: "index.html,styles.css,script.js,site.config.js"
-          target: "/var/www/photography-site"
+      - run: echo "This workflow is a placeholder. Use deploy-pages.yml for automatic deployment."
